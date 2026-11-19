@@ -2,6 +2,8 @@
 
 A web platform for Myanmar that turns unwanted materials into useful resources. People sell, give away or ask for recyclable materials (contacts are shared only after a request is accepted), report dumped waste on a public map, and learn how to reuse or recycle each material. Built as the MVP for the hackathon proposal *Technology for Environmental Sustainability & Disaster Resilience*.
 
+**Live demo:** https://reloop-waste-platform.vercel.app
+
 > မလိုချင်သော ပစ္စည်းများကို အသုံးဝင်သော အရင်းအမြစ်များအဖြစ် ပြောင်းလဲပေးသည့် မြန်မာနိုင်ငံအတွက် ဝဘ်ပလက်ဖောင်း — စွန့်ပစ်ပစ္စည်း ဈေးကွက်၊ အမှိုက်မြေပုံနှင့် ပြန်သုံးနည်းများ။ English နှင့် မြန်မာ နှစ်ဘာသာဖြင့် အသုံးပြုနိုင်သည်။
 
 ## Repository
