@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>ReLoop — Project Documentation</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  @page {
+    @bottom-left { content: "ReLoop Project Documentation | Environmental Sustainability"; }
+    @bottom-right { content: "Page " counter(page); }
+  }
+  @page :first {
+    @bottom-left { content: none; border: none; }
+    @bottom-right { content: none; border: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================== COVER ============================== -->
+<section class="cover">
+  <div class="eyebrow">Project Documentation</div>
+  <h1>Waste Exchange &amp;<br />Environmental Mapping<br />Platform</h1>
+  <div class="rule"></div>
+  <div class="subtitle">MVP web application — explanation &amp; technology stack</div>
+  <table>
+    <thead><tr><th colspan="2">PROJECT DETAILS</th></tr></thead>
+    <tbody>
+      <tr><td class="key">Project name</td><td>ReLoop (working name — final name to be confirmed)</td></tr>
+      <tr><td class="key">Based on</td><td>Hackathon Project Proposal: “Technology for Environmental Sustainability &amp; Disaster Resilience”</td></tr>
+      <tr><td class="key">Project type</td><td>Web-based environmental sustainability platform</td></tr>
+      <tr><td class="key">Target location</td><td>Myanmar</td></tr>
+      <tr><td class="key">Project stage</td><td>Minimum Viable Product (MVP) — working web app with demo data</td></tr>
+      <tr><td class="key">Languages</td><td>English and Burmese (မြန်မာ)</td></tr>
+      <tr><td class="key">Document date</td><td>19 November 2026</td></tr>
+    </tbody>
+  </table>
+  <div class="tagline">Turning unwanted materials into useful resources.</div>
+</section>
+
+<!-- ============================== 1 ============================== -->
+<h2>1. About This Document</h2>
+<p>This document explains the ReLoop web application that has been built from the hackathon proposal, and the technology it uses. It is written for judges, teammates and partners who want to understand what the platform does today.</p>
+<div class="note">
+  <strong>Reference document:</strong> <em>Hackathon Project Proposal — Technology for Environmental Sustainability &amp; Disaster Resilience</em> (file: <code>source/environmental_sustainability_hackathon_proposal.pdf</code>). Section numbers such as “Proposal §3.1” in this document point to that proposal. The proposal explains <em>why</em> the platform is needed; this document explains <em>what has been built</em> and <em>how it works</em>.
+</div>
+<p class="muted">Scope: product explanation, features, pages and technology stack. Data storage design is outside the scope of this document.</p>
+
+<!-- ============================== 2 ============================== -->
+<h2>2. Project Overview</h2>
+<p>ReLoop is a web-based environmental sustainability platform that reduces waste pollution and encourages the reuse and recycling of waste materials in Myanmar (Proposal §1). It connects individuals, junk shops, organisations and businesses so that unwanted materials reach people who can use them.</p>
+<p>The platform answers the three problems in Proposal §2 with three connected components (Proposal §3):</p>
+<table>
+  <thead><tr><th style="width:33%">Problem (Proposal §2)</th><th style="width:27%">Component</th><th>How the app solves it</th></tr></thead>
+  <tbody>
+    <tr><td>No connection between waste generators and recyclers</td><td>Waste Marketplace</td><td>Members list materials for sale, for free, or as wanted; others send requests; contacts are exchanged after acceptance.</td></tr>
+    <tr><td>Limited information about waste locations</td><td>Waste Map</td><td>Anyone can pin dumped waste on an interactive map; admins move each report from reported to resolved.</td></tr>
+    <tr><td>Low awareness about reusing waste</td><td>Reuse &amp; Recycling Ideas</td><td>Step-by-step guides per material, with difficulty and safety notes, linked to matching listings.</td></tr>
+  </tbody>
+</table>
+
+<h3>Who uses it (Proposal §4)</h3>
+<table class="narrow">
+  <thead><tr><th style="width:28%">User type</th><th>What they can do in the app</th></tr></thead>
+  <tbody>
+    <tr><td>Individual</td><td>Sell, give away or request materials; report waste locations; follow their reports.</td></tr>
+    <tr><td>Junk Shop</td><td>Post WANTED listings for scrap, buy bulk recyclables, sell sorted material.</td></tr>
+    <tr><td>Organisation</td><td>Collect materials for projects, run clean-ups, report and follow waste sites.</td></tr>
+    <tr><td>Business</td><td>Source raw material for recycling or production; sell production offcuts.</td></tr>
+    <tr><td>Administrator</td><td>Verify reports, review listings, manage members, categories and ideas.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== 3 ============================== -->
+<h2>3. Features Delivered</h2>
+
+<h3>3.1 Waste Marketplace (Proposal §3.1)</h3>
+<p>Members browse listings as cards and can search by keyword and filter by listing type, material category, city and status, and sort by newest, price or quantity. Each listing shows the material, quantity and unit, price where applicable, location (city, township and optional map pin) and its status.</p>
+<table class="narrow">
+  <thead><tr><th style="width:22%">Listing type</th><th>Meaning in the app</th></tr></thead>
+  <tbody>
+    <tr><td>For Sale</td><td>The owner sells material at a price per unit (in MMK). A price is required.</td></tr>
+    <tr><td>Free</td><td>The owner gives material away. No price is stored.</td></tr>
+    <tr><td>Wanted</td><td>The owner is looking for material. Other members offer it to them.</td></tr>
+  </tbody>
+</table>
+<p>Listing owners can mark a listing Active, Paused, Reserved, Completed or Closed at any time.</p>
+
+<h3>3.2 Request, Exchange and Contact Privacy (Proposal §3.1)</h3>
+<ol class="steps">
+  <li>A member creates a listing.</li>
+  <li>Another member opens it and sends a request with a quantity and a message. On a Wanted listing this is an <em>offer</em>.</li>
+  <li>The listing owner accepts or rejects the request. Only the owner can do this, and members cannot request their own listings.</li>
+  <li>After acceptance, both sides see each other’s Telegram, phone or email and arrange the exchange themselves.</li>
+  <li>The owner marks the exchange as completed. The requester can cancel a pending or accepted request.</li>
+</ol>
+<div class="note"><strong>Contact privacy:</strong> contact details never appear on listings or public profiles. They are shown only to the listing owner and the requester, and only once a request is accepted or completed. The MVP does not process payments or manage delivery, as stated in the proposal.</div>
+
+<h3>3.3 Waste Map (Proposal §3.2)</h3>
+<p>Reports appear as coloured pins on an interactive OpenStreetMap map, with a side list that can be searched and filtered by status and waste category. Clicking a pin opens the report: category, description, estimated amount, location, reporter and a progress timeline. New reports are created by clicking the map or using the device location.</p>
+<table class="narrow">
+  <thead><tr><th style="width:22%">Status</th><th style="width:16%">Map colour</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>REPORTED</td><td>Red</td><td>Submitted by a community member, awaiting verification.</td></tr>
+    <tr><td>VERIFIED</td><td>Amber</td><td>Checked by an administrator and queued for collection.</td></tr>
+    <tr><td>COLLECTED</td><td>Blue</td><td>The waste has been picked up.</td></tr>
+    <tr><td>RESOLVED</td><td>Green</td><td>The site is clean and the case is closed.</td></tr>
+  </tbody>
+</table>
+<p class="muted">As in the proposal, a waste report is separate from a marketplace listing: reporting a site does not put the material up for sale.</p>
+
+<h3>3.4 Reuse &amp; Recycling Ideas (Proposal §3.3)</h3>
+<p>Ideas are prepared by administrators (not AI-generated) and can be filtered by material and by method (Reuse or Recycle). Each idea has a description, numbered steps, difficulty, safety notes and links to matching listings. The demo includes 14 ideas, covering every example in the proposal:</p>
+<table class="narrow">
+  <thead><tr><th style="width:28%">Material</th><th>Ideas in the app</th></tr></thead>
+  <tbody>
+    <tr><td>Plastic bottles</td><td>Plant pots, eco-bricks, selling sorted PET</td></tr>
+    <tr><td>Cardboard</td><td>Compost “browns”, selling to box makers</td></tr>
+    <tr><td>Glass bottles</td><td>Decoration, reusable storage jars</td></tr>
+    <tr><td>Old tyres</td><td>Garden planters</td></tr>
+    <tr><td>Scrap metal</td><td>Selling aluminium cans to scrap buyers</td></tr>
+    <tr><td>Old clothes</td><td>Cleaning cloths, rag rugs</td></tr>
+    <tr><td>Other</td><td>Safe e-waste drop-off, balcony compost, pallet bench</td></tr>
+  </tbody>
+</table>
+
+<h3>3.5 Supporting Features (Proposal §6)</h3>
+<ul>
+  <li><strong>Registration and login</strong> — sign-up with account type and private contact details; login by email.</li>
+  <li><strong>Profiles</strong> — public profile with bio, location, listings, reports and activity counts.</li>
+  <li><strong>Dashboard</strong> — My listings, incoming requests, sent requests and my waste reports in one place.</li>
+  <li><strong>Administrator console</strong> — update report status, review listing status, deactivate or reactivate members, enable or disable categories, publish or hide ideas.</li>
+  <li><strong>Homepage and About page</strong> — platform statistics, latest listings and reports, and the project’s purpose and vision.</li>
+  <li><strong>Responsive interface</strong> — works on phones, tablets and desktops, with light and dark themes.</li>
+  <li><strong>English and Burmese</strong> — the whole interface switches language from the header, including dates and Myanmar numerals.</li>
+</ul>
+
+<!-- ============================== 4 ============================== -->
+<h2>4. Pages of the Application</h2>
+<table>
+  <thead><tr><th style="width:24%">Page</th><th style="width:22%">Path</th><th>What it shows</th></tr></thead>
+  <tbody>
+    <tr><td>Home</td><td><code>/</code></td><td>Statistics, categories, newest listings, how an exchange works, latest reports, ideas</td></tr>
+    <tr><td>Marketplace</td><td><code>/listings</code></td><td>All listings with search, filters and sorting</td></tr>
+    <tr><td>Listing detail</td><td><code>/listings/[id]</code></td><td>Material details, map pin, owner, request button, contacts after acceptance</td></tr>
+    <tr><td>Post a listing</td><td><code>/listings/new</code></td><td>Form for For Sale, Free or Wanted listings with a map pin</td></tr>
+    <tr><td>Waste map</td><td><code>/map</code></td><td>Interactive map and filterable list of reports</td></tr>
+    <tr><td>Report detail</td><td><code>/reports/[id]</code></td><td>Report details, progress timeline, reporter, related ideas</td></tr>
+    <tr><td>Report waste</td><td><code>/reports/new</code></td><td>Click-to-pin report form</td></tr>
+    <tr><td>Reuse ideas</td><td><code>/suggestions</code></td><td>Ideas filtered by material and method</td></tr>
+    <tr><td>Idea detail</td><td><code>/suggestions/[id]</code></td><td>Steps, safety notes, matching listings</td></tr>
+    <tr><td>Member profile</td><td><code>/users/[id]</code></td><td>Public profile without contact details</td></tr>
+    <tr><td>Dashboard</td><td><code>/dashboard</code></td><td>My listings, incoming and sent requests, my reports</td></tr>
+    <tr><td>Admin console</td><td><code>/admin</code></td><td>Reports, listings, members, categories and ideas management</td></tr>
+    <tr><td>About</td><td><code>/about</code></td><td>Problems, solution, impact and vision from the proposal</td></tr>
+    <tr><td>Log in / Register</td><td><code>/login</code>, <code>/register</code></td><td>Account access and sign-up</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== 5 ============================== -->
+<h2>5. Technology Stack</h2>
+<table>
+  <thead><tr><th style="width:22%">Layer</th><th style="width:30%">Technology</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>Framework</td><td>Next.js 16 (App Router)</td><td>Pages, server rendering, Server Actions for every form and button</td></tr>
+    <tr><td>UI library</td><td>React 19, TypeScript 5</td><td>Components and type safety</td></tr>
+    <tr><td>Styling</td><td>Tailwind CSS 4</td><td>Responsive layout, green theme, light and dark mode</td></tr>
+    <tr><td>Components</td><td>shadcn/ui (Radix UI), lucide icons</td><td>Accessible buttons, dialogs, menus, tables, tabs</td></tr>
+    <tr><td>Maps</td><td>Leaflet + React Leaflet, OpenStreetMap</td><td>Waste map, location picker, listing pins</td></tr>
+    <tr><td>Forms</td><td>zod</td><td>Validation with messages in English or Burmese</td></tr>
+    <tr><td>Languages</td><td>Built-in dictionaries (EN / MY)</td><td>Full interface translation, Myanmar dates and numerals</td></tr>
+    <tr><td>Fonts</td><td>Geist, Noto Sans Myanmar</td><td>Clear Latin and Burmese text</td></tr>
+    <tr><td>Feedback</td><td>sonner, next-themes</td><td>Toast messages, theme switching</td></tr>
+    <tr><td>Data (current)</td><td>Demo data on the server</td><td>Realistic sample members, listings, requests, reports and ideas; resets on restart</td></tr>
+  </tbody>
+</table>
+
+<h3>Compared with the proposed technology (Proposal §9)</h3>
+<table>
+  <thead><tr><th style="width:20%">Layer</th><th style="width:28%">Proposal</th><th style="width:30%">This build</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Frontend</td><td>React.js / Next.js</td><td>Next.js 16 + React 19</td><td class="status done">In place</td></tr>
+    <tr><td>Backend</td><td>Next.js API / Node.js</td><td>Next.js Server Actions</td><td class="status done">In place</td></tr>
+    <tr><td>Map</td><td>Leaflet / OpenStreetMap</td><td>Leaflet + OpenStreetMap</td><td class="status done">In place</td></tr>
+    <tr><td>Authentication</td><td>Session or JWT</td><td>Demo login and registration</td><td class="status demo">Demo</td></tr>
+    <tr><td>Database &amp; ORM</td><td>PostgreSQL, Prisma</td><td>Demo data</td><td class="status planned">Next step</td></tr>
+    <tr><td>Image storage</td><td>Cloudinary / Supabase Storage</td><td>Category placeholders</td><td class="status planned">Next step</td></tr>
+    <tr><td>Deployment</td><td>Vercel</td><td>Ready to deploy</td><td class="status planned">Next step</td></tr>
+  </tbody>
+</table>
+
+<h3>Project structure</h3>
+<table>
+  <thead><tr><th style="width:34%">Folder</th><th>Contents</th></tr></thead>
+  <tbody>
+    <tr><td><code>web/src/app</code></td><td>One folder per page (routes listed in section 4)</td></tr>
+    <tr><td><code>web/src/components</code></td><td>Reusable UI: cards, forms, map, badges, layout, shadcn/ui</td></tr>
+    <tr><td><code>web/src/lib/i18n</code></td><td>English and Burmese dictionaries, formatters, language helpers</td></tr>
+    <tr><td><code>web/src/lib/actions.ts</code></td><td>Server Actions: post, request, accept, report, admin changes</td></tr>
+    <tr><td><code>web/src/lib/data</code></td><td>Demo data and the functions pages use to read it</td></tr>
+    <tr><td><code>source/</code></td><td>The hackathon proposal and planning files</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== 6 ============================== -->
+<h2>6. Proposal Coverage (Proposal §8)</h2>
+<p>The table maps every item in the proposal’s MVP scope to its status in this build.</p>
+<table>
+  <thead><tr><th style="width:34%">Feature (Proposal §8)</th><th style="width:14%">Status</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Authentication and User Profiles</td><td class="status demo">Demo</td><td>Register, log in and profiles work; passwords are not yet checked. A demo user switcher helps reviewers test roles.</td></tr>
+    <tr><td>Material Categories</td><td class="status done">Done</td><td>10 categories; admins enable or disable them.</td></tr>
+    <tr><td>Marketplace Listings</td><td class="status done">Done</td><td>Create, browse, search, filter, sort and change status.</td></tr>
+    <tr><td>Material Requests</td><td class="status done">Done</td><td>Send, accept, reject, cancel and complete.</td></tr>
+    <tr><td>Contact Sharing After Acceptance</td><td class="status done">Done</td><td>Enforced on the server for every page and action.</td></tr>
+    <tr><td>Waste Reporting</td><td class="status done">Done</td><td>Map pin, category, details, estimated amount. Photo upload is a next step.</td></tr>
+    <tr><td>Interactive Waste Map</td><td class="status done">Done</td><td>Coloured pins, popups, status and category filters, search.</td></tr>
+    <tr><td>Reporter Information</td><td class="status done">Done</td><td>Shown on every report, linked to the reporter’s profile.</td></tr>
+    <tr><td>Reuse &amp; Recycling Suggestions</td><td class="status done">Done</td><td>14 ideas; admins publish or hide them.</td></tr>
+    <tr><td>Administrator Management</td><td class="status done">Done</td><td>Reports, listings, members, categories and ideas.</td></tr>
+    <tr><td>Notifications</td><td class="status excluded">Excluded</td><td>Out of MVP scope, as in the proposal.</td></tr>
+    <tr><td>Online Payments</td><td class="status excluded">Excluded</td><td>Out of MVP scope, as in the proposal.</td></tr>
+    <tr><td>AI Recommendations</td><td class="status planned">Future</td><td>Future development, as in the proposal.</td></tr>
+    <tr><td>Challenges and Leaderboards</td><td class="status planned">Future</td><td>Future development, as in the proposal.</td></tr>
+    <tr><td>English &amp; Burmese interface</td><td class="status done">Added</td><td>Beyond the proposal: full bilingual UI for Myanmar users.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== 7 ============================== -->
+<h2>7. Running the Project</h2>
+<p>Requirements: Node.js 20 or later and npm. From the project folder:</p>
+<pre>cd web
+npm install
+npm run dev        # then open http://localhost:3000</pre>
+<p>There is no password for the demo. Use the account menu (top right) to switch between demo users, or log in with a demo email on the login page. The language button in the header switches between English and မြန်မာ.</p>
+<table class="narrow">
+  <thead><tr><th style="width:32%">Demo user</th><th style="width:20%">Role</th><th>Good for trying</th></tr></thead>
+  <tbody>
+    <tr><td>Aung Min Thu</td><td>Individual</td><td>Accepting incoming requests; seeing contacts after acceptance</td></tr>
+    <tr><td>Shwe Pyi Junk Shop</td><td>Junk shop</td><td>Wanted listings; a pending request and an accepted one</td></tr>
+    <tr><td>Green Yangon Initiative</td><td>Organisation</td><td>Waste reports and eco-brick listing</td></tr>
+    <tr><td>Platform Admin</td><td>Administrator</td><td>Admin console: report status, members, categories, ideas</td></tr>
+  </tbody>
+</table>
+<p class="muted">Changes made in the demo (new listings, requests, reports, accounts) are kept until the server restarts.</p>
+
+<!-- ============================== 8 ============================== -->
+<h2>8. Next Steps</h2>
+<ol>
+  <li>Connect the planned PostgreSQL database with Prisma (Proposal §9) in place of the demo data; the pages do not need to change.</li>
+  <li>Replace demo login with secure session or JWT authentication and password checks.</li>
+  <li>Add photo upload for listings and waste reports using Cloudinary or Supabase Storage.</li>
+  <li>Deploy to Vercel and run user testing with junk shops and community groups in Yangon and Mandalay.</li>
+  <li>Review the Burmese wording with native speakers before launch.</li>
+</ol>
+
+<!-- ============================== 9 ============================== -->
+<h2>9. Conclusion</h2>
+<p>The MVP delivers the three components set out in the proposal — a waste marketplace with private contact exchange, a community waste map and reuse and recycling ideas — together with profiles, a dashboard, an administrator console and a fully bilingual interface. It is ready to demonstrate how the platform addresses environmental waste problems in Myanmar.</p>
+<div class="vision">Waste should not always be the end of a product’s life.<br />It can be the beginning of another resource’s life.</div>
+<hr class="vision-rule" />
+<p class="ref">Reference: Hackathon Project Proposal — Technology for Environmental Sustainability &amp; Disaster Resilience, Waste Exchange &amp; Environmental Mapping Platform (<code>environmental_sustainability_hackathon_proposal.pdf</code>), sections 1–11.</p>
+
+</body>
+</html>
